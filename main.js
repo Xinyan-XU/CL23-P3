@@ -1,7 +1,5 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-// import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
-// import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
 //scene
 const scene = new THREE.Scene();
