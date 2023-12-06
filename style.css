@@ -1,0 +1,15 @@
+body {
+    margin: 0
+}
+
+.buttons{
+    position: fixed;
+    top:20px;
+    left:20px
+}
+
+.inputs{
+    position: fixed;
+    top:70px;
+    left:20px
+}
