@@ -4,23 +4,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500&display=swap" rel="stylesheet">
     <title>ESCAPE ROOM</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="buttons">
-        <div>Box Control</div>
-        <button id="item_pick">show</button>
-        <button id="item_rotate">rotate</button>
-    </div>
-    <div class="inputs">
-        <div>Enter a 6-digit key to escape</div>
-        <input id="password">
-        <button id="enter">enter</button>
+    <!-- timer -->
+    <div class="timer">
+        <div>Timer </div>
+        <div id="timerDisplay"></div>
     </div>
 
-    <script type="module" src="main.js"></script>
+    <!-- escape unlock -->
+    <div id="wordsPass">A 6-Digit Key to Escape!</div>
+    <div class="inputs">
+        <input class="input1" id="password1" maxlength="1">
+        <input class="input1" id="password2" maxlength="1">
+        <input class="input1" id="password3" maxlength="1">
+        <input class="input1" id="password4" maxlength="1">
+        <input class="input1" id="password5" maxlength="1">
+        <input class="input1" id="password6" maxlength="1">
+        <button class="button" id="enter">🔒</button>
+    </div>
+
+    <!-- unwrap box -->
+    <div id="wordsUnlock">Passcode to Unwrap Box</div>
+    <div class="unlockBox">
+        <input class="input1" id="unlockPassword1" maxlength="1">
+        <input class="input1" id="unlockPassword2" maxlength="1">
+        <input class="input1" id="unlockPassword3" maxlength="1">
+        <input class="input1" id="unlockPassword4" maxlength="1">
+        <input class="input1" id="unlockPassword5" maxlength="1">
+        <input class="input1" id="unlockPassword6" maxlength="1">
+        <button class="button" id="unlock">📦</button>
+    </div>
+
+    <!-- box control -->
+    <div class="buttons">
+        <button class="buttonBox" id="item_pick">Open Box</button>
+        <button class="buttonBox" id="item_rotate">Rotate Box</button>
+    </div>
+
+    <!-- party mode -->
+    <div id="wordsParty">PARTY TIME!</div>
+    <div class="confetti">
+        <button class="buttonCon" id="effectCon">🎉</button>
+    </div>
+
+    <!-- results enter -->
+    <div class="resultsPage">
+        <input class="input2" id="user" placeholder="Bravo! Leave Your Name">
+        <button class="buttonSubmit" id="submit">Submit My Escape Result</button>
+        <button class="buttonSubmit" id="showResults">see all results</button>
+    </div>
+
+    <!-- results display -->
+    <div class="result" id="displayResults"></div>
+
+    <!-- p5 sound & confetti effect -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.11.0/tsparticles.confetti.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+
+    <!-- sound load -->
+    <audio id="SuccessSound" src="https://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/ateapill.ogg"
+        preload="auto"></audio>
+    <audio id="failSound" src="https://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3"
+        preload="auto"></audio>
+    <audio id="getKey" src="https://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a"
+        preload="auto"></audio>
+    <audio id="unlockSound" src="https://codeskulptor-demos.commondatastorage.googleapis.com/descent/spring.mp3"
+        preload="auto"></audio>
+
+    <script type="module" src="three.js"></script>
 </body>
 
 </html>

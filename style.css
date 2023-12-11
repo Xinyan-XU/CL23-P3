@@ -1,15 +1,226 @@
 body {
-    margin: 0
+    margin: 0;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 25px;
 }
 
-.buttons{
-    position: fixed;
-    top:20px;
-    left:20px
+#item_pick,
+#item_rotate,
+#wordsParty,
+#effectCon,
+#user,
+#submit,
+#showResults {
+    display: none;
 }
 
-.inputs{
+/* timer */
+.timer {
     position: fixed;
-    top:70px;
-    left:20px
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    top: 30px;
+    left: 28px;
+    margin-right: 10px;
+}
+
+/* escape unlock */
+#wordsPass {
+    position: fixed;
+    top: 90px;
+    left: 28px;
+}
+.inputs {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    top: 125px;
+    left: 25px;
+}
+
+/* unwrap box */
+#wordsUnlock {
+    position: fixed;
+    top: 180px;
+    left: 28px;
+}
+.unlockBox {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    top: 215px;
+    left: 25px;
+}
+
+/* box control */
+.buttons {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    top: 260px;
+    left: 28px
+}
+
+/* confetti control */
+#wordsParty{
+    position: fixed;
+    top: 305px;
+    left: 28px;
+}
+.confetti {
+    position: fixed;
+    top: 340px;
+    left: 25px;
+}
+
+/* results enter */
+.resultsPage {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 600px;
+    left: 25px;
+}
+
+/* result display */
+.result {
+    position: fixed;
+    top: 60px;
+    left: 75VW;
+    font-size: 22px;
+    margin-right: 25px;
+}
+
+/* button */
+/* button */
+/* button */
+/* emoji button code style */
+.button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 37px;
+    height: 37px;
+    font-size: 22px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 3px;
+}
+
+.button:hover {
+    scale: 0.9;
+}
+
+/* box control button style */
+.buttonBox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 142px;
+    height: 35px;
+    font-size: 20px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 3px;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.buttonBox:hover {
+    scale: 0.95;
+}
+
+/* submit button style */
+.buttonSubmit {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 290px;
+    height: 35px;
+    font-size: 20px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 3px;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.buttonSubmit:hover {
+    scale: 0.95;
+}
+
+/* confetti button style */
+.buttonCon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 290px;
+    height: 250px;
+    font-size: 100px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 3px;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.buttonCon:hover {
+    scale: 0.95;
+}
+
+/* inputs */
+/* inputs */
+/* inputs */
+/* password input style */
+.input1 {
+    width: 20px;
+    height: 20px;
+    outline: none;
+    margin: 3px;
+    transition: .5s;
+    border: none;
+    border-radius: 10px;
+    padding: 8px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 20px;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+/* userID input style */
+.input2 {
+    width: 273px;
+    height: 20px;
+    outline: none;
+    margin: 3px;
+    transition: .5s;
+    border: none;
+    border-radius: 10px;
+    padding: 8px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 20px;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.input2::placeholder {
+    color: rgb(220, 220, 220);
 }
