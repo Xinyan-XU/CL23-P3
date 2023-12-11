@@ -1,5 +1,16 @@
 import express from "express";
 import ViteExpress from "vite-express";
+import { Database } from "quickmongo";
+import dotenv from 'dotenv';
+
+dotenv.config();
+const mongodbPassword = process.env.MONGODB;
+const db = new Database(mongodbPassword);
+
+db.on("ready", () => {
+    console.log("Connected to the database");
+});
+db.connect();
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -7,7 +18,6 @@ const app = express();
 app.use(express.json());
 app.use('/results', express.static('results'));
 
-let userData = [];
 app.post('/userData', (req, res) => {
     console.log(req.body);
 
@@ -20,14 +30,19 @@ app.post('/userData', (req, res) => {
         date: time
     }
 
-    userData.push(dataGet);
-    console.log(userData);
+    // userData.push(dataGet);
+    // console.log(userData);
+    db.push("webData", dataGet);
     res.json({ task: "success" });
 })
 
+//let userData = [];
 app.get('/storageData', (req, res) => {
-    let dataSto = { data: userData };
-    res.json(dataSto);
+    db.get("webData").then(userData => {
+        let dataSto = { data: userData };
+        res.json(dataSto);
+    })
 })
 
-ViteExpress.listen(app, PORT, () => console.log("Server is listening..."));
+const listener = ViteExpress.listen(app, PORT, () =>
+    console.log("Server is listening on port " + listener.address().port));

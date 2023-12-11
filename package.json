@@ -1,7 +1,10 @@
 {
   "dependencies": {
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "mongodb": "^6.3.0",
     "nodemon": "^3.0.2",
+    "quickmongo": "^5.2.0",
     "three": "^0.159.0",
     "vite-express": "^0.11.1"
   },

@@ -285,6 +285,7 @@ let party = document.getElementById('wordsParty');
 let submit = document.getElementById('submit');
 let userId = document.getElementById('user');
 let getResults = document.getElementById('showResults');
+let rankTitle = document.getElementById('wordsRank');
 
 let passwordInput1 = document.getElementById('password1');
 let passwordInput2 = document.getElementById('password2');
@@ -578,15 +579,24 @@ window.addEventListener('load', () => {
     })
 
     getResults.addEventListener('click', () => {
+        rankTitle.style.display = 'block';
+
         fetch('/storageData')
             .then(response => response.json())
             .then(data => {
                 console.log(data.data)
                 document.getElementById('displayResults').innerHTML = '';
-                data.data.reverse();
+
+                //data.data.reverse();
+                data.data.sort((a, b) => {
+                    const totalTimeA = a.timeM * 60 + a.timeS;
+                    const totalTimeB = b.timeM * 60 + b.timeS;
+
+                    return totalTimeA - totalTimeB;
+                });
 
                 for (let i = 0; i < data.data.length; i++) {
-                    let string = data.data[i].ID + " NAILED the game in " + data.data[i].timeM + " minutes " + data.data[i].timeS + " seconds, " + data.data[i].date;
+                    let string = data.data[i].ID + " ESCAPED in " + data.data[i].timeM + " minutes " + data.data[i].timeS + " seconds, " + data.data[i].date;
                     let element = document.createElement('p');
                     element.innerHTML = string;
                     document.getElementById('displayResults').appendChild(element);

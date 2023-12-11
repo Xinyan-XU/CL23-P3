@@ -10,7 +10,8 @@ body {
 #effectCon,
 #user,
 #submit,
-#showResults {
+#showResults,
+#wordsRank {
     display: none;
 }
 
@@ -84,11 +85,18 @@ body {
 }
 
 /* result display */
+#wordsRank{
+    position: fixed;
+    top: 85px;
+    left: 75VW;
+    font-size: 25px;
+}
 .result {
     position: fixed;
-    top: 60px;
+    top: 100px;
     left: 75VW;
     font-size: 22px;
+    margin: 10px 0px;
     margin-right: 25px;
 }
 
