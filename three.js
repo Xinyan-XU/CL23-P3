@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { Reflector } from 'three/addons/objects/Reflector.js';
 
 //scene
 const scene = new THREE.Scene();
@@ -63,6 +64,7 @@ function pickImage() {
 
 //lighting
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.target.position.set(0, 0, 0);
 scene.add(directionalLight);
 
 // Add an ambient light to the scene
@@ -108,7 +110,7 @@ function createFloor() {
     let pos = { x: 0, y: -2.5, z: 0 };
 
     const plane = new THREE.BoxGeometry(size.x, size.y, size.z);
-    const materialPlane = new THREE.MeshPhongMaterial({ color: 'grey', shininess: 5 });
+    const materialPlane = new THREE.MeshPhongMaterial({ color: 'silver', shininess: 10 });
 
     floor = new THREE.Mesh(plane, materialPlane);
     floor.position.set(pos.x, pos.y, pos.z);
@@ -118,6 +120,12 @@ function createFloor() {
 function createWall() {
     let size = { x: 39, y: 39, z: 0.4 };
 
+    const mirror = {
+        clipBias: 0.003,
+        textureWidth: window.innerWidth * window.devicePixelRatio,
+        textureHeight: window.innerHeight * window.devicePixelRatio,
+        color: 0xb5b5b5
+    };
     const materialWall = new THREE.MeshPhongMaterial({ color: 'silver', shininess: 5 });
 
     const wallR = new THREE.Mesh(new THREE.BoxGeometry(size.x, size.y, size.z), materialWall);
@@ -129,16 +137,15 @@ function createWall() {
     const wallD = new THREE.Mesh(new THREE.BoxGeometry(size.z, size.x, size.y), materialWall);
     wallD.position.set(20, 18, 0);
 
-    const wallT = new THREE.Mesh(new THREE.BoxGeometry(size.x, size.y, size.z), materialWall);
+    const wallT = new Reflector(new THREE.BoxGeometry(size.x, size.y, size.z), mirror);
     wallT.position.set(0, 18, -20);
 
     scene.add(wallR, wallT, wallL, wallD);
 }
 
 function createBox() {
-    let size = { x: 3, y: 3, z: 3 };
-    let pos = { x: 0, y: 1, z: 0 };
-
+    let size = { x: 5, y: 5, z: 5 };
+    let pos = { x: 0, y: 2, z: 0 };
     const box = new THREE.BoxGeometry(size.x, size.y, size.z);
 
     cube = new THREE.Mesh(box, material1);
@@ -305,6 +312,12 @@ pickToggle.addEventListener('click', () => {
 
 rotToggle.addEventListener('click', () => {
     rotate = !rotate;
+
+    if (rotate) {
+        rotToggle.innerHTML = "STOP ROTATE";
+    }else{
+        rotToggle.innerHTML = "ROTATE BOX";
+    }
 });
 
 unlockButton.addEventListener('click', () => {
@@ -323,12 +336,12 @@ unlockButton.addEventListener('click', () => {
     unlockPassword6.value = '';
 
     if (
-        boxValue1 === "B" &&
-        boxValue2 === "Y" &&
-        boxValue3 === "P" &&
-        boxValue4 === "R" &&
-        boxValue5 === "O" &&
-        boxValue6 === "G"
+        boxValue1 === "P" &&
+        boxValue2 === "O" &&
+        boxValue3 === "R" &&
+        boxValue4 === "G" &&
+        boxValue5 === "B" &&
+        boxValue6 === "Y"
     ) {
         getKey.play();
 
@@ -393,7 +406,6 @@ enterButton.addEventListener('click', () => {
         partyMode.style.display = 'block';
         userId.style.display = 'block';
         submit.style.display = 'block';
-        getResults.style.display = 'block';
 
     } else {
         failSound.play();
@@ -555,7 +567,7 @@ window.addEventListener('load', () => {
         let id = userId.value;
         let minutes = formatTime(timer.minutes);
         let seconds = formatTime(timer.seconds);
-        console.log(id);
+        //console.log(id);
 
         if (id.trim() !== '') {
             let data = {
@@ -573,7 +585,13 @@ window.addEventListener('load', () => {
                 body: jsonData
             })
                 .then(response => response.json())
-                .then(data => { console.log(data) })
+                //.then(data => { console.log(data) })
+
+                getResults.style.display = 'block';
+                submit.innerHTML = "SUBMITTED!";
+                submit.disabled = true;
+        }else {
+            userId.placeholder = "Leave a Name!";
         }
         userId.value = '';
     })
@@ -584,7 +602,7 @@ window.addEventListener('load', () => {
         fetch('/storageData')
             .then(response => response.json())
             .then(data => {
-                console.log(data.data)
+                //console.log(data.data)
                 document.getElementById('displayResults').innerHTML = '';
 
                 //data.data.reverse();

@@ -162,6 +162,7 @@ body {
     cursor: pointer;
     margin: 3px;
     font-family: 'Chakra Petch', sans-serif;
+    background-color: aquamarine;
 }
 
 .buttonSubmit:hover {
