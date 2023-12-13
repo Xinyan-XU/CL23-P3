@@ -168,7 +168,7 @@ body {
     cursor: pointer;
     margin: 3px;
     font-family: 'Chakra Petch', sans-serif;
-    background-color: aquamarine;
+    background-color: chartreuse;
 }
 
 .buttonSubmit:hover {
@@ -255,4 +255,8 @@ body {
 
 .input2::placeholder {
     color: rgb(220, 220, 220);
+}
+
+.highlight {
+    color: chartreuse;
 }

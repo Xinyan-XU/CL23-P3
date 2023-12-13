@@ -354,6 +354,11 @@ unlockButton.addEventListener('click', () => {
 
     } else {
         failSound.play();
+        unlockButton.innerText = "❌";
+
+        setTimeout(() => {
+            unlockButton.innerText = "📦";
+        }, 1000);
     }
 })
 
@@ -409,6 +414,11 @@ enterButton.addEventListener('click', () => {
 
     } else {
         failSound.play();
+        enterButton.innerText = "❌"
+
+        setTimeout(() => {
+            enterButton.innerText = "🔒";
+        }, 1000);
     }
 });
 
@@ -614,7 +624,7 @@ window.addEventListener('load', () => {
                 });
 
                 for (let i = 0; i < data.data.length; i++) {
-                    let string = data.data[i].ID + " ESCAPED in " + data.data[i].timeM + " minutes " + data.data[i].timeS + " seconds, " + data.data[i].date;
+                    let string = "<span class='highlight'>" + data.data[i].ID + "</span> ESCAPED in " + data.data[i].timeM + " minutes " + data.data[i].timeS + " seconds, " + data.data[i].date;
                     let element = document.createElement('p');
                     element.innerHTML = string;
                     document.getElementById('displayResults').appendChild(element);
