@@ -37,7 +37,7 @@ let imageTexture = imageLoader.load(img);
 let material1 = new THREE.MeshPhongMaterial({ map: imageTexture, shininess: 10, specular: '#ffffff' });
 
 function pickImage() {
-    const imgs = ['./image/1.png', './image/2.png', './image/3.png', './image/4.png', './image/5.png', './image/6.png'];
+    const imgs = ['./image/1.png', './image/2.png', './image/3.png', './image/4.png', './image/5.png', './image/6.1.png'];
 
     img = imgs.shift();
     imgs.push(img);
@@ -315,7 +315,7 @@ rotToggle.addEventListener('click', () => {
 
     if (rotate) {
         rotToggle.innerHTML = "STOP ROTATE";
-    }else{
+    } else {
         rotToggle.innerHTML = "ROTATE BOX";
     }
 });
@@ -585,12 +585,12 @@ window.addEventListener('load', () => {
                 body: jsonData
             })
                 .then(response => response.json())
-                //.then(data => { console.log(data) })
+            //.then(data => { console.log(data) })
 
-                getResults.style.display = 'block';
-                submit.innerHTML = "SUBMITTED!";
-                submit.disabled = true;
-        }else {
+            getResults.style.display = 'block';
+            submit.innerHTML = "SUBMITTED!";
+            submit.disabled = true;
+        } else {
             userId.placeholder = "Leave a Name!";
         }
         userId.value = '';
@@ -621,6 +621,34 @@ window.addEventListener('load', () => {
                 }
             })
     })
+
+    ////////////////////input auto next////////////////////
+    ////////////////////input auto next////////////////////
+    ////////////////////input auto next////////////////////
+    let inputs = document.getElementsByClassName('input1');
+    let inputs3 = document.getElementsByClassName('input3');
+
+    Array.from(inputs).forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+            const nextInput = inputs[index + 1];
+            if (nextInput && input.value) {
+                nextInput.focus();
+            } if (e.inputType === 'deleteContentBackward' && index > 0) {
+                inputs[index - 1].focus();
+            }
+        });
+    });
+
+    Array.from(inputs3).forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+            const nextInput = inputs3[index + 1];
+            if (nextInput && input.value) {
+                nextInput.focus();
+            } if (e.inputType === 'deleteContentBackward' && index > 0) {
+                inputs3[index - 1].focus();
+            }
+        });
+    });
 });
 
 ////////////////////windowsize////////////////////
