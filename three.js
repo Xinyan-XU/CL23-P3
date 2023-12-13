@@ -110,7 +110,7 @@ function createFloor() {
     let pos = { x: 0, y: -2.5, z: 0 };
 
     const plane = new THREE.BoxGeometry(size.x, size.y, size.z);
-    const materialPlane = new THREE.MeshPhongMaterial({ color: 'silver', shininess: 10 });
+    const materialPlane = new THREE.MeshPhongMaterial({ color: 'grey', shininess: 10 });
 
     floor = new THREE.Mesh(plane, materialPlane);
     floor.position.set(pos.x, pos.y, pos.z);
@@ -126,7 +126,7 @@ function createWall() {
         textureHeight: window.innerHeight * window.devicePixelRatio,
         color: 0xb5b5b5
     };
-    const materialWall = new THREE.MeshPhongMaterial({ color: 'silver', shininess: 5 });
+    const materialWall = new THREE.MeshPhongMaterial({ color: '#e8e8e8', shininess: 5 });
 
     const wallR = new THREE.Mesh(new THREE.BoxGeometry(size.x, size.y, size.z), materialWall);
     wallR.position.set(0, 18, 20);
@@ -166,17 +166,17 @@ function createSphere(location, color, radius) {
     balls.push(ball);
 }
 
-let octahedrons = [];
-function createOctahedron(location, color) {
-    const geoOct = new THREE.OctahedronGeometry(0.5);
-    const materialOct = new THREE.MeshPhongMaterial({ color: color, shininess: 5, specular: '#ffffff' });
+// let octahedrons = [];
+// function createOctahedron(location, color) {
+//     const geoOct = new THREE.OctahedronGeometry(0.5);
+//     const materialOct = new THREE.MeshPhongMaterial({ color: color, shininess: 5, specular: '#ffffff' });
 
-    const octahedron = new THREE.Mesh(geoOct, materialOct);
-    octahedron.position.copy(location);
-    scene.add(octahedron);
+//     const octahedron = new THREE.Mesh(geoOct, materialOct);
+//     octahedron.position.copy(location);
+//     scene.add(octahedron);
 
-    return octahedron;
-}
+//     return octahedron;
+// }
 
 function createTorus(position) {
     const torus = new THREE.TorusGeometry(0.2, 0.1, 16, 100);
@@ -221,20 +221,20 @@ function createMultiple() {
 
             // Check if the new position is at least 5 units away from existing models and from the center
             let tooClose = false;
-            for (let j = 0; j < octahedrons.length; j++) {
-                const distBetweenModels = location.distanceTo(octahedrons[j].position);
-                if (distBetweenModels < minDistance || distFromCenter < minDistance) {
-                    tooClose = true;
-                    break;
-                }
-            }
+            // for (let j = 0; j < octahedrons.length; j++) {
+            //     const distBetweenModels = location.distanceTo(octahedrons[j].position);
+                // if (distBetweenModels < minDistance || distFromCenter < minDistance) {
+                //     tooClose = true;
+                //     break;
+                // }
+            // }
 
             if (!tooClose) {
                 const color = ballColors[i];
                 createSphere(location, color, radius);
                 radius += radiusIn;
-                newModel = createOctahedron(location, color);
-                octahedrons.push(newModel);
+                //newModel = createOctahedron(location, color);
+                //octahedrons.push(newModel);
                 validPosition = true;
             }
         }
@@ -261,9 +261,9 @@ function animate() {
         scene.rotation.y += 0.01;
     }
 
-    for (let i = 0; i < octahedrons.length; i++) {
-        octahedrons[i].rotation.y += 0.05;
-    }
+    // for (let i = 0; i < octahedrons.length; i++) {
+    //     octahedrons[i].rotation.y += 0.05;
+    // }
 
     constrainCamera();
 }
@@ -377,11 +377,11 @@ enterButton.addEventListener('click', () => {
     passwordInput5.value = '';
     passwordInput6.value = '';
 
-    if (enteredValue1 === '0' &&
-        enteredValue2 === '0' &&
-        enteredValue3 === '1' &&
-        enteredValue4 === '0' &&
-        enteredValue5 === '1' &&
+    if (enteredValue1 === '3' &&
+        enteredValue2 === '6' &&
+        enteredValue3 === '4' &&
+        enteredValue4 === '5' &&
+        enteredValue5 === '2' &&
         enteredValue6 === '1') {
 
         constrain = false;
@@ -447,20 +447,20 @@ function onMouseDown(event) {
 
     raycaster.setFromCamera(mouse, camera);
 
-    for (let i = 0; i < octahedrons.length; i++) {
-        const intersects = raycaster.intersectObject(octahedrons[i]);
+    // for (let i = 0; i < octahedrons.length; i++) {
+    //     const intersects = raycaster.intersectObject(octahedrons[i]);
 
-        if (intersects.length > 0) {
-            const clickedOct = intersects[0].object;
-            const octahedronColor = octahedrons[i].material.color.getHex();
+    //     if (intersects.length > 0) {
+    //         const clickedOct = intersects[0].object;
+    //         const octahedronColor = octahedrons[i].material.color.getHex();
 
-            if (octahedronColor === 0xFFFF00 || octahedronColor === 0xFF0000 || octahedronColor === 0x0000FF) {
-                createTorus(clickedOct.position);
-            } else {
-                createCapsule(clickedOct.position);
-            }
-        }
-    }
+    //         if (octahedronColor === 0xFFFF00 || octahedronColor === 0xFF0000 || octahedronColor === 0x0000FF) {
+    //             //createTorus(clickedOct.position);
+    //         } else {
+    //             //createCapsule(clickedOct.position);
+    //         }
+    //     }
+    // }
 
     // Define objects to be intersected for dragging
     const draggableObjects = [cube, ...balls];
@@ -559,8 +559,6 @@ function stopTimer() {
 
 
 window.addEventListener('load', () => {
-    startTimer();
-
     partyMode.addEventListener('click', () => {
         confetti({
             particleCount: 300,
@@ -659,6 +657,19 @@ window.addEventListener('load', () => {
             }
         });
     });
+
+    ////////////////////welcome notes////////////////////
+    ////////////////////welcome notes////////////////////
+    ////////////////////welcome notes////////////////////
+    let closeWelcome = document.getElementById('closeWelcome');
+    document.getElementById('welcomeBox').style.display = 'block';
+
+    closeWelcome.addEventListener('click', () => {
+        startTimer();
+        failSound.play();
+        document.getElementById('welcomeBox').style.display = 'none';
+    });
+
 });
 
 ////////////////////windowsize////////////////////
