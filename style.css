@@ -68,13 +68,13 @@ body {
 /* confetti control */
 #wordsParty {
     position: fixed;
-    top: 305px;
+    top: 315px;
     left: 28px;
 }
 
 .confetti {
     position: fixed;
-    top: 340px;
+    top: 350px;
     left: 25px;
 }
 
@@ -83,7 +83,7 @@ body {
     position: fixed;
     display: flex;
     flex-direction: column;
-    top: 600px;
+    top: 607px;
     left: 25px;
 }
 
@@ -144,7 +144,7 @@ body {
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
-    margin: 3px;
+    margin-right: 5px;
     font-family: 'Chakra Petch', sans-serif;
 }
 
