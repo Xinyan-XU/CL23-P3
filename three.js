@@ -2,6 +2,9 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Reflector } from 'three/addons/objects/Reflector.js';
 
+////////////////////setup////////////////////
+////////////////////setup////////////////////
+////////////////////setup////////////////////
 //scene
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('silver');
@@ -37,7 +40,7 @@ let imageTexture = imageLoader.load(img);
 let material1 = new THREE.MeshPhongMaterial({ map: imageTexture, shininess: 10, specular: '#ffffff' });
 
 function pickImage() {
-    const imgs = ['./image/1.png', './image/2.png', './image/3.png', './image/4.png', './image/5.png', './image/6.1.png'];
+    const imgs = ['./image/1.png', './image/2.png', './image/3.png', './image/4.png', './image/5.png', './image/6.png'];
 
     img = imgs.shift();
     imgs.push(img);
@@ -67,7 +70,7 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.target.position.set(0, 0, 0);
 scene.add(directionalLight);
 
-// Add an ambient light to the scene
+//ambient light
 const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
 scene.add(ambientLight);
 
@@ -178,29 +181,29 @@ function createSphere(location, color, radius) {
 //     return octahedron;
 // }
 
-function createTorus(position) {
-    const torus = new THREE.TorusGeometry(0.2, 0.1, 16, 100);
-    const materialTorus = new THREE.MeshPhongMaterial({ color: 'white', shininess: 5, specular: '#ffffff' });
+// function createTorus(position) {
+//     const torus = new THREE.TorusGeometry(0.2, 0.1, 16, 100);
+//     const materialTorus = new THREE.MeshPhongMaterial({ color: 'white', shininess: 5, specular: '#ffffff' });
 
-    ring = new THREE.Mesh(torus, materialTorus);
-    ring.position.copy(position);
-    ring.position.y += 1;
-    scene.add(ring);
-}
+//     ring = new THREE.Mesh(torus, materialTorus);
+//     ring.position.copy(position);
+//     ring.position.y += 1;
+//     scene.add(ring);
+// }
 
-function createCapsule(position) {
-    const cap = new THREE.CapsuleGeometry(0.1, 0.3, 10, 20);
-    const materialCap = new THREE.MeshPhongMaterial({ color: 'white', shininess: 5, specular: '#ffffff' });
+// function createCapsule(position) {
+//     const cap = new THREE.CapsuleGeometry(0.1, 0.3, 10, 20);
+//     const materialCap = new THREE.MeshPhongMaterial({ color: 'white', shininess: 5, specular: '#ffffff' });
 
-    capsule = new THREE.Mesh(cap, materialCap);
-    capsule.position.copy(position);
-    capsule.position.y += 1;
-    scene.add(capsule);
-}
+//     capsule = new THREE.Mesh(cap, materialCap);
+//     capsule.position.copy(position);
+//     capsule.position.y += 1;
+//     scene.add(capsule);
+// }
 
 function createMultiple() {
     const floorSize = 35;
-    const minDistance = 5;
+    // const minDistance = 5;
     const num = 6;
     let radius = 2;
     let radiusIn = 0.3;
@@ -209,7 +212,7 @@ function createMultiple() {
 
     for (let i = 0; i < num; i++) {
         let validPosition = false;
-        let newModel;
+        //let newModel;
 
         while (!validPosition) {
             const posX = Math.random() * floorSize - floorSize / 2;
@@ -217,18 +220,18 @@ function createMultiple() {
             const posZ = Math.random() * floorSize - floorSize / 2;
 
             const location = new THREE.Vector3(posX, posY, posZ);
-            const distFromCenter = location.distanceTo(new THREE.Vector3(0, 0, 0));
+            //const distFromCenter = location.distanceTo(new THREE.Vector3(0, 0, 0));
 
             // Check if the new position is at least 5 units away from existing models and from the center
-            let tooClose = false;
             // for (let j = 0; j < octahedrons.length; j++) {
             //     const distBetweenModels = location.distanceTo(octahedrons[j].position);
-                // if (distBetweenModels < minDistance || distFromCenter < minDistance) {
-                //     tooClose = true;
-                //     break;
-                // }
+            // if (distBetweenModels < minDistance || distFromCenter < minDistance) {
+            //     tooClose = true;
+            //     break;
+            // }
             // }
 
+            let tooClose = false;
             if (!tooClose) {
                 const color = ballColors[i];
                 createSphere(location, color, radius);
@@ -268,9 +271,9 @@ function animate() {
     constrainCamera();
 }
 
-////////////////////render////////////////////
-////////////////////render////////////////////
-////////////////////render////////////////////
+////////////////////render objects////////////////////
+////////////////////render objects////////////////////
+////////////////////render objects////////////////////
 createFloor();
 createWall();
 createBox();
@@ -278,153 +281,9 @@ createMultiple();
 
 animate();
 
-////////////////////ANSWER////////////////////
-////////////////////ANSWER////////////////////
-////////////////////ANSWER////////////////////
-let pickToggle = document.getElementById('item_pick');
-let rotToggle = document.getElementById('item_rotate');
-let unlockButton = document.getElementById('unlock')
-let enterButton = document.getElementById('enter');
-let wordsUnlock = document.getElementById('wordsUnlock');
-let escaped = document.getElementById('wordsPass');
-let partyMode = document.getElementById('effectCon');
-let party = document.getElementById('wordsParty');
-let submit = document.getElementById('submit');
-let userId = document.getElementById('user');
-let getResults = document.getElementById('showResults');
-let rankTitle = document.getElementById('wordsRank');
-
-let passwordInput1 = document.getElementById('password1');
-let passwordInput2 = document.getElementById('password2');
-let passwordInput3 = document.getElementById('password3');
-let passwordInput4 = document.getElementById('password4');
-let passwordInput5 = document.getElementById('password5');
-let passwordInput6 = document.getElementById('password6');
-
-const failSound = new Audio("https://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3");
-const unlockSound = new Audio("https://codeskulptor-demos.commondatastorage.googleapis.com/descent/spring.mp3");
-const successSound = new Audio("https://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/ateapill.ogg");
-const getKey = new Audio("https://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a");
-
-pickToggle.addEventListener('click', () => {
-    pickImage();
-});
-
-rotToggle.addEventListener('click', () => {
-    rotate = !rotate;
-
-    if (rotate) {
-        rotToggle.innerHTML = "STOP ROTATE";
-    } else {
-        rotToggle.innerHTML = "ROTATE BOX";
-    }
-});
-
-unlockButton.addEventListener('click', () => {
-    let boxValue1 = unlockPassword1.value.toUpperCase();
-    let boxValue2 = unlockPassword2.value.toUpperCase();
-    let boxValue3 = unlockPassword3.value.toUpperCase();
-    let boxValue4 = unlockPassword4.value.toUpperCase();
-    let boxValue5 = unlockPassword5.value.toUpperCase();
-    let boxValue6 = unlockPassword6.value.toUpperCase();
-
-    unlockPassword1.value = '';
-    unlockPassword2.value = '';
-    unlockPassword3.value = '';
-    unlockPassword4.value = '';
-    unlockPassword5.value = '';
-    unlockPassword6.value = '';
-
-    if (
-        boxValue1 === "P" &&
-        boxValue2 === "O" &&
-        boxValue3 === "R" &&
-        boxValue4 === "G" &&
-        boxValue5 === "B" &&
-        boxValue6 === "Y"
-    ) {
-        getKey.play();
-
-        pickToggle.style.display = 'block';
-        rotToggle.style.display = 'block';
-
-        unlockButton.innerText = "☑️"
-        unlockButton.disabled = true;
-        wordsUnlock.innerText = "BOX UNWRAPPED!"
-
-    } else {
-        failSound.play();
-        unlockButton.innerText = "❌";
-
-        setTimeout(() => {
-            unlockButton.innerText = "📦";
-        }, 1000);
-    }
-})
-
-enterButton.addEventListener('click', () => {
-    let enteredValue1 = passwordInput1.value;
-    let enteredValue2 = passwordInput2.value;
-    let enteredValue3 = passwordInput3.value;
-    let enteredValue4 = passwordInput4.value;
-    let enteredValue5 = passwordInput5.value;
-    let enteredValue6 = passwordInput6.value;
-
-    passwordInput1.value = '';
-    passwordInput2.value = '';
-    passwordInput3.value = '';
-    passwordInput4.value = '';
-    passwordInput5.value = '';
-    passwordInput6.value = '';
-
-    if (enteredValue1 === '3' &&
-        enteredValue2 === '6' &&
-        enteredValue3 === '4' &&
-        enteredValue4 === '5' &&
-        enteredValue5 === '2' &&
-        enteredValue6 === '1') {
-
-        constrain = false;
-        rotateScene = true;
-
-        camera.position.set(100, 100, 5);
-
-        stopTimer()
-
-        confetti({
-            particleCount: 200,
-            spread: 300,
-            origin: { y: 0.5 },
-        });
-
-        unlockSound.play();
-
-        setTimeout(function () {
-            successSound.play();
-        }, 1500);
-
-        enterButton.innerText = "🗝️"
-        enterButton.disabled = true;
-        escaped.innerText = "ESCAPE SUCCESS!"
-
-        party.style.display = 'block';
-        partyMode.style.display = 'block';
-        userId.style.display = 'block';
-        submit.style.display = 'block';
-
-    } else {
-        failSound.play();
-        enterButton.innerText = "❌"
-
-        setTimeout(() => {
-            enterButton.innerText = "🔒";
-        }, 1000);
-    }
-});
-
-////////////////////raycaster////////////////////
-////////////////////raycaster////////////////////
-////////////////////raycaster////////////////////
+////////////////////view control////////////////////
+////////////////////view control////////////////////
+////////////////////view control////////////////////
 let orbitEnabled = true;
 let selectedObject = null;
 let dragging = false;
@@ -557,8 +416,157 @@ function stopTimer() {
     clearInterval(timerInterval);
 }
 
-
+////////////////////all clicks////////////////////
+////////////////////all clicks////////////////////
+////////////////////all clicks////////////////////
 window.addEventListener('load', () => {
+    let pickToggle = document.getElementById('item_pick');
+    let rotToggle = document.getElementById('item_rotate');
+    let unlockButton = document.getElementById('unlock')
+    let enterButton = document.getElementById('enter');
+    let wordsUnlock = document.getElementById('wordsUnlock');
+    let escaped = document.getElementById('wordsPass');
+    let partyMode = document.getElementById('effectCon');
+    let party = document.getElementById('wordsParty');
+    let submit = document.getElementById('submit');
+    let userId = document.getElementById('user');
+    let getResults = document.getElementById('showResults');
+    let rankTitle = document.getElementById('wordsRank');
+
+    const failSound = new Audio("https://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3");
+    const unlockSound = new Audio("https://codeskulptor-demos.commondatastorage.googleapis.com/descent/spring.mp3");
+    const successSound = new Audio("https://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/ateapill.ogg");
+    const getKey = new Audio("https://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a");
+
+    ////////////////////ANSWER////////////////////
+    ////////////////////ANSWER////////////////////
+    ////////////////////ANSWER////////////////////
+    let passwordInput1 = document.getElementById('password1');
+    let passwordInput2 = document.getElementById('password2');
+    let passwordInput3 = document.getElementById('password3');
+    let passwordInput4 = document.getElementById('password4');
+    let passwordInput5 = document.getElementById('password5');
+    let passwordInput6 = document.getElementById('password6');
+
+    pickToggle.addEventListener('click', () => {
+        pickImage();
+    });
+
+    rotToggle.addEventListener('click', () => {
+        rotate = !rotate;
+
+        if (rotate) {
+            rotToggle.innerHTML = "STOP ROTATE";
+        } else {
+            rotToggle.innerHTML = "ROTATE BOX";
+        }
+    });
+
+    unlockButton.addEventListener('click', () => {
+        let boxValue1 = unlockPassword1.value.toUpperCase();
+        let boxValue2 = unlockPassword2.value.toUpperCase();
+        let boxValue3 = unlockPassword3.value.toUpperCase();
+        let boxValue4 = unlockPassword4.value.toUpperCase();
+        let boxValue5 = unlockPassword5.value.toUpperCase();
+        let boxValue6 = unlockPassword6.value.toUpperCase();
+
+        unlockPassword1.value = '';
+        unlockPassword2.value = '';
+        unlockPassword3.value = '';
+        unlockPassword4.value = '';
+        unlockPassword5.value = '';
+        unlockPassword6.value = '';
+
+        if (
+            boxValue1 === "P" &&
+            boxValue2 === "O" &&
+            boxValue3 === "R" &&
+            boxValue4 === "G" &&
+            boxValue5 === "B" &&
+            boxValue6 === "Y"
+        ) {
+            getKey.play();
+
+            pickToggle.style.display = 'block';
+            rotToggle.style.display = 'block';
+
+            unlockButton.innerText = "☑️"
+            unlockButton.disabled = true;
+            wordsUnlock.innerText = "BOX UNWRAPPED!"
+
+        } else {
+            failSound.play();
+            unlockButton.innerText = "❌";
+
+            setTimeout(() => {
+                unlockButton.innerText = "📦";
+            }, 1000);
+        }
+    })
+
+    enterButton.addEventListener('click', () => {
+        let enteredValue1 = passwordInput1.value;
+        let enteredValue2 = passwordInput2.value;
+        let enteredValue3 = passwordInput3.value;
+        let enteredValue4 = passwordInput4.value;
+        let enteredValue5 = passwordInput5.value;
+        let enteredValue6 = passwordInput6.value;
+
+        passwordInput1.value = '';
+        passwordInput2.value = '';
+        passwordInput3.value = '';
+        passwordInput4.value = '';
+        passwordInput5.value = '';
+        passwordInput6.value = '';
+
+        if (enteredValue1 === '3' &&
+            enteredValue2 === '6' &&
+            enteredValue3 === '4' &&
+            enteredValue4 === '5' &&
+            enteredValue5 === '2' &&
+            enteredValue6 === '1') {
+
+            constrain = false;
+            rotateScene = true;
+
+            camera.position.set(100, 100, 5);
+
+            stopTimer()
+
+            confetti({
+                particleCount: 200,
+                spread: 300,
+                origin: { y: 0.5 },
+            });
+
+            unlockSound.play();
+
+            setTimeout(function () {
+                successSound.play();
+            }, 1500);
+
+            enterButton.innerText = "🗝️"
+            enterButton.disabled = true;
+            escaped.innerText = "ESCAPE SUCCESS!"
+
+            party.style.display = 'block';
+            partyMode.style.display = 'block';
+            userId.style.display = 'block';
+            submit.style.display = 'block';
+
+        } else {
+            failSound.play();
+            enterButton.innerText = "❌"
+
+            setTimeout(() => {
+                enterButton.innerText = "🔒";
+            }, 1000);
+        }
+    });
+
+    ////////////////////confetti////////////////////
+    ////////////////////confetti////////////////////
+    ////////////////////confetti////////////////////
     partyMode.addEventListener('click', () => {
         confetti({
             particleCount: 300,

@@ -3,6 +3,9 @@ import ViteExpress from "vite-express";
 import { Database } from "quickmongo";
 import dotenv from 'dotenv';
 
+const PORT = process.env.PORT || 3000;
+const app = express();
+
 dotenv.config();
 const mongodbPassword = process.env.MONGODB;
 const db = new Database(mongodbPassword);
@@ -12,11 +15,7 @@ db.on("ready", () => {
 });
 db.connect();
 
-const PORT = process.env.PORT || 3000;
-const app = express();
-
 app.use(express.json());
-app.use('/results', express.static('results'));
 
 app.post('/userData', (req, res) => {
     console.log(req.body);

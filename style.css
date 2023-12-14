@@ -32,7 +32,6 @@ body {
     top: 90px;
     left: 28px;
 }
-
 .inputs {
     position: fixed;
     display: flex;
@@ -47,7 +46,6 @@ body {
     top: 180px;
     left: 28px;
 }
-
 .unlockBox {
     position: fixed;
     display: flex;
@@ -71,7 +69,6 @@ body {
     top: 315px;
     left: 28px;
 }
-
 .confetti {
     position: fixed;
     top: 350px;
@@ -94,7 +91,6 @@ body {
     left: 75VW;
     font-size: 25px;
 }
-
 .result {
     position: fixed;
     top: 120px;
@@ -261,7 +257,7 @@ body {
     color: chartreuse;
 }
 
-/* enter page welcome notes*/
+/* enter page welcome notes & button*/
 .welcome {
     display: none;
     position: fixed;
